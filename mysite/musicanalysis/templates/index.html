@@ -5,7 +5,11 @@
     <title>トップページ</title>
 </head>
 <body>
-  <p>こちらのフォームにプレイリストのURLを入力してください</p>
-  <button>送信</button>
+    <label for="url">Enter an https:// URL:</label>
+
+    <input type="url" name="url" id="url"
+           placeholder="https://open.spotify.com/playlist/"
+           pattern="https://open.spotify.com/playlist/.*" size="30"
+           required>
 </body>
 </html>
