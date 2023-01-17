@@ -5,11 +5,14 @@
     <title>トップページ</title>
 </head>
 <body>
-    <label for="url">Enter an https:// URL:</label>
+    <title>分析対象のプレイリストのURLを入力してください。</title>
 
-    <input type="url" name="url" id="url"
-           placeholder="https://open.spotify.com/playlist/"
-           pattern="https://open.spotify.com/playlist/.*" size="30"
-           required>
+    <form method="POST">
+        <table>
+            <input name="url" type="url"/>
+        </table>
+        {% csrf_token %}
+        <button type="submit">送信</button>
+    </form>
 </body>
 </html>
