@@ -1,13 +1,17 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import base64
+from io import BytesIO
 import seaborn as sns
 
 
-def output_histogram(analysis_data):
+def plot_histogram(analysis_data):
     df = analysis_data
 
     fig = plt.figure()
+    plt.cla()
+    plt.switch_backend("AGG")
     plt.subplots_adjust(wspace=1, hspace=1)
 
     ax1 = fig.add_subplot(4, 4, 1)
@@ -53,7 +57,20 @@ def output_histogram(analysis_data):
     # ax.set_title('danceability histgram')
     # ax.set_xlabel('danceability')
     # ax.set_ylabel('frequency')
-    plt.show()
+    plt.tight_layout()
+    graph = output_plot_histogram()
+    return graph
+
+
+def output_plot_histogram():
+    buffer = BytesIO()  # バイナリI/O(画像や音声データを取り扱う際に利用)
+    plt.savefig(buffer, format="png")  # png形式の画像データを取り扱う
+    buffer.seek(0)  # ストリーム先頭のoffset byteに変更
+    img = buffer.getvalue()  # バッファの全内容を含むbytes
+    graph = base64.b64encode(img)  # 画像ファイルをbase64でエンコード
+    graph = graph.decode("utf-8")  # デコードして文字列から画像に変換
+    buffer.close()
+    return graph
 
 
 def output_heatmap(analysis_data):

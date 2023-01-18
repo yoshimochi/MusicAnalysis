@@ -1,24 +1,21 @@
 from datetime import date
 
-import spotipy
 
-
-def get_track_ids(spotipy, playlist_ids):
+def get_track_ids(spotipy, playlist_id):
     track_ids = []
 
-    for playlist_id in playlist_ids:
-        playlist = spotipy.playlist(playlist_id)
-        while playlist['tracks']['next']:
-            for item in playlist['tracks']['items']:
-                track = item['track']
-                if not track['id'] in track_ids:
-                    track_ids.append(track['id'])
-            playlist['tracks'] = spotipy.next(playlist['tracks'])
-        else:
-            for item in playlist['tracks']['items']:
-                track = item['track']
-                if not track['id'] in track_ids:
-                    track_ids.append(track['id'])
+    playlist = spotipy.playlist(playlist_id)
+    while playlist['tracks']['next']:
+        for item in playlist['tracks']['items']:
+            track = item['track']
+            if not track['id'] in track_ids:
+                track_ids.append(track['id'])
+        playlist['tracks'] = spotipy.next(playlist['tracks'])
+    else:
+        for item in playlist['tracks']['items']:
+            track = item['track']
+            if not track['id'] in track_ids:
+                track_ids.append(track['id'])
 
     return track_ids
 
