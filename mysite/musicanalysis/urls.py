@@ -6,4 +6,6 @@ app_name = "musicanalysis"
 
 urlpatterns = [
     path("", views.top, name="top"),
+    path("result/", views.result, name="result"),
+    path("plot/", views.get_svg, name="plot"),
 ]

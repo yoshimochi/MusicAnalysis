@@ -6,6 +6,6 @@
 </head>
 <body>
     <h1>POSTされたよ</h1>
-    <img src="data:image/png;base64, {{ hist | safe }} " width=600 height=600>
+    <img src="{% url 'musicanalysis:plot' %}" width=600 height=600>
 </body>
 </html>

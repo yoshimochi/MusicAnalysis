@@ -37,18 +37,15 @@ def main(playlist_id):
     analysis_data = pd.read_csv(csv_dir)
 
     # ヒストグラムを描画
-    hist = plot_histogram(analysis_data)
+    # hist = plot_histogram(analysis_data)
 
     # 相関関係を描画
     # output_heatmap(analysis_data)
 
-    # track_idsの初期化
-    trace_ids = []
-
     # csv保存ディレクトリを初期化
-    os.remove(csv_dir)
+    # os.remove(csv_dir)
 
-    return hist
+    return analysis_data
 
 
 
