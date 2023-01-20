@@ -1,18 +1,17 @@
-import os, sys
+import sys, time
 import pathlib
+
 currentdir = pathlib.Path(__file__).resolve().parent
-sys.path.append(str(currentdir)+"/../mysite/")
+sys.path.append(str(currentdir) + "/../mysite/")
 
 import pandas as pd
-import spotipy
 from spotipy import Spotify
 from spotipy.oauth2 import SpotifyClientCredentials
 
 from .get_track import get_track_ids, get_track_features
-from .create_music_data import create_csv, to_csv
-from .graph import plot_histogram, output_heatmap
 from .config import SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET
 from mysite import settings
+
 
 def main(playlist_id):
     # Spotipy認証
@@ -33,21 +32,23 @@ def main(playlist_id):
     # csvディレクトリに保存
     to_csv(music_data)
 
-    # 保存したcsvを読み込む
-    analysis_data = pd.read_csv(csv_dir)
 
-    # ヒストグラムを描画
-    # hist = plot_histogram(analysis_data)
+def create_csv(spotipy, track_ids):
+    tracks = []
 
-    # 相関関係を描画
-    # output_heatmap(analysis_data)
+    for track_id in track_ids:
+        time.sleep(0.5)
+        track = get_track_features(spotipy, track_id)
+        tracks.append(track)
 
-    # csv保存ディレクトリを初期化
-    # os.remove(csv_dir)
+    df = pd.DataFrame(tracks, columns=['name', 'album', 'artist', 'release_date', 'length', 'popularity', 'key', 'mode',
+                                       'danceability', 'acousticness', 'energy', 'instrumentalness', 'liveness',
+                                       'loudness', 'speechiness', 'tempo', 'time_signature', 'valence'])
 
-    return analysis_data
+    return df
 
 
-
-# main(spotipy, playlist_ids)
-
+def to_csv(df):
+    exp_path = settings.MEDIA_ROOT + "spotify_music_data.csv"
+    df.to_csv(exp_path, encoding='utf-8', index=False)
+    return df
