@@ -1,13 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>POSTされたよ</h1>
-    {% load static %}
-    <img src="{% static 'hist.png' %}" width=600 height=600>
-    <img src="{% static 'heatmap.png' %}" width=600 height=600>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block Content %}
+<h1>POSTされたよ</h1>
+{% load static %}
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'png/acousticness.png' %}" class="card-img-top" alt="アコースティック度">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'png/danceability.png' %}" class="card-img-top" alt="踊りやすさ">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'png/energy.png' %}" class="card-img-top" alt="エネルギッシュさ">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'png/instrumentalness.png' %}" class="card-img-top" alt="インスト度">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'png/liveness.png' %}" class="card-img-top" alt="ライブ感">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'png/loudness.png' %}" class="card-img-top" alt="音量レベル">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'png/speechiness.png' %}" class="card-img-top" alt="喋りっぽさ">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'png/tempo.png' %}" class="card-img-top" alt="テンポ">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'png/valence.png' %}" class="card-img-top" alt="曲の明るさ">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'png/heatmap.png' %}" class="card-img-top" alt="相関関数">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+{% endblock Content %}

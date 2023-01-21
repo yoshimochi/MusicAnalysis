@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>トップページ</title>
-</head>
-<body>
-    <title>分析対象のプレイリストのURLを入力してください。</title>
+{% extends 'base.html' %}
+{% block Content %}
+<h3>分析対象のプレイリストのURLを入力してください。</h3>
+<form action="" method="POST">{% csrf_token %}
+    <input type="playlist_id" name="playlist_id" class="form-control" placeholder="URL">
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" name="button">送信</button>
-    </form>
-
-    <img src="{{ hist }}">
-</body>
-</html>
+    <input type="submit" value="送信">
+</form>
+{% endblock Content %}
