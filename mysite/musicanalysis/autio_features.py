@@ -15,7 +15,9 @@ from mysite import settings
 
 def main(playlist_id):
     # Spotipy認証
-    client_credentials_manager = SpotifyClientCredentials(SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET)
+    client_credentials_manager = SpotifyClientCredentials(
+        SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET
+    )
     spotipy = Spotify(client_credentials_manager=client_credentials_manager)
 
     csv_dir = settings.MEDIA_ROOT + "spotify_music_data.csv"
@@ -41,14 +43,31 @@ def create_csv(spotipy, track_ids):
         track = get_track_features(spotipy, track_id)
         tracks.append(track)
 
-    df = pd.DataFrame(tracks, columns=['name', 'album', 'artist', 'release_date', 'length', 'popularity', 'key', 'mode',
-                                       'danceability', 'acousticness', 'energy', 'instrumentalness', 'liveness',
-                                       'loudness', 'speechiness', 'tempo', 'time_signature', 'valence'])
+    df = pd.DataFrame(
+        tracks,
+        columns=[
+            "name",
+            "album",
+            "artist",
+            "release_date",
+            "popularity",
+            "danceability",
+            "acousticness",
+            "energy",
+            "instrumentalness",
+            "liveness",
+            "loudness",
+            "speechiness",
+            "tempo",
+            "time_signature",
+            "valence",
+        ],
+    )
 
     return df
 
 
 def to_csv(df):
     exp_path = settings.MEDIA_ROOT + "spotify_music_data.csv"
-    df.to_csv(exp_path, encoding='utf-8', index=False)
+    df.to_csv(exp_path, encoding="utf-8", index=False)
     return df
