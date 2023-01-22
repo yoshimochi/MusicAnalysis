@@ -2,7 +2,7 @@
 {% block Content %}
 <h3>分析対象のプレイリストのURLを入力してください。</h3>
 <form action="" method="POST">{% csrf_token %}
-    <input type="playlist_id" name="playlist_id" class="form-control" placeholder="URL">
+    <input type="playlist_url" name="playlist_url" class="form-control" placeholder="URL">
 
     <input type="submit" value="送信">
 </form>

@@ -1,74 +1,96 @@
 {% extends 'base.html' %}
 {% block Content %}
-<h1>POSTされたよ</h1>
+<h1>分析結果を見てみよう！</h1>
+{% if error_message %}
+  <ul>
+    <li>error_message</li>
+  </ul>
+{% endif %}
+
 {% load static %}
-<div class="card" style="width: 18rem;">
-  <img src="{% static 'png/acousticness.png' %}" class="card-img-top" alt="アコースティック度">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+<div class="card-group">
+  <div class="card">
+    <img src="{% static 'png/acousticness.png' %}" class="card-img-top" alt="アコースティック度">
+    <div class="card-body">
+      <p class="card-title">アコースティック度</p>
+      <p class="card-text">
+        トラックがアコースティックであるかどうかの尺度を0.0から1.0の範囲で表している
+      </p>
+    </div>
   </div>
-</div>
 
-<div class="card" style="width: 18rem;">
-  <img src="{% static 'png/danceability.png' %}" class="card-img-top" alt="踊りやすさ">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  <div class="card">
+    <img src="{% static 'png/danceability.png' %}" class="card-img-top" alt="踊りやすさ">
+    <div class="card-body">
+      <p class="card-title">ダンスアビリティ</p>
+      <p class="card-text">
+        ダンスアビリティは、テンポ、リズムの安定性、ビートの強さ、全体的な規則性などの音楽要素の組み合わせに基づいて、
+        トラックがダンスに適しているかを表している。0.0は最もダンサブルでなく、1.0は最もダンサブルです。
+      </p>
+    </div>
   </div>
-</div>
 
-<div class="card" style="width: 18rem;">
-  <img src="{% static 'png/energy.png' %}" class="card-img-top" alt="エネルギッシュさ">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  <div class="card">
+    <img src="{% static 'png/energy.png' %}" class="card-img-top" alt="エネルギッシュさ">
+    <div class="card-body">
+      <p class="card-title">エネルギー度</p>
+      <p class="card-text">
+        エネルギー度は0.0から1.0までの値で、強度と活性の知覚的な尺度を表している。一般的に、エネルギーが高い曲は、速く、うるさく、騒がしいと感じられる。
+      </p>
+    </div>
   </div>
-</div>
 
-<div class="card" style="width: 18rem;">
-  <img src="{% static 'png/instrumentalness.png' %}" class="card-img-top" alt="インスト度">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  <div class="card">
+    <img src="{% static 'png/instrumentalness.png' %}" class="card-img-top" alt="インスト度">
+    <div class="card-body">
+      <p class="card-title">インストゥルメンタル度</p>
+      <p class="card-text">
+        トラックにボーカルが含まれていないかどうかを予測する。"Ooh "と "aah "の音は、この文脈ではインストゥルメンタルとして扱われる。
+        1.0に近いほど、そのトラックにはボーカルコンテンツが含まれない可能性が高くなる。0.5以上の値はインストゥルメンタルトラックを表すことを意図しており、値が1.0に近づくほど信頼度は高くなる。
+      </p>
+    </div>
   </div>
-</div>
 
-<div class="card" style="width: 18rem;">
-  <img src="{% static 'png/liveness.png' %}" class="card-img-top" alt="ライブ感">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  <div class="card">
+    <img src="{% static 'png/liveness.png' %}" class="card-img-top" alt="ライブ感">
+    <div class="card-body">
+      <p class="card-title">ライブ度</p>
+      <p class="card-text">
+        録音に観客がいることを検出する。
+        ライブ値が高いほど、そのトラックがライブで演奏された可能性が高いことを表す。0.8以上の値は、そのトラックがライブである可能性が高いことを示す。
+      </p>
+    </div>
   </div>
-</div>
 
-<div class="card" style="width: 18rem;">
-  <img src="{% static 'png/loudness.png' %}" class="card-img-top" alt="音量レベル">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  <div class="card">
+    <img src="{% static 'png/speechiness.png' %}" class="card-img-top" alt="喋りっぽさ">
+    <div class="card-body">
+      <p class="card-title">スピーチ度</p>
+      <p class="card-text">スピーチ度はトラック内の話し言葉の存在を検出する。
+        音声のみの録音（トークショー、オーディオブック、詩など）であればあるほど、属性値は1.0に近くなる。0.66を超える値は、おそらく完全に話し言葉で構成されているトラックを表す。
+        0.33から0.66の間の値は、音楽と音声の両方が部分的または層状に含まれている可能性があるトラックを表し、ラップ音楽などのケースも含まれる。
+        0.33以下の値は、音楽とその他の非音声的なトラックを表している可能性が高い。
+      </p>
+    </div>
   </div>
-</div>
 
-<div class="card" style="width: 18rem;">
-  <img src="{% static 'png/speechiness.png' %}" class="card-img-top" alt="喋りっぽさ">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  <div class="card">
+    <img src="{% static 'png/valence.png' %}" class="card-img-top" alt="曲の明るさ">
+    <div class="card-body">
+      <p class="card-title">ポジティブ度</p>
+      <p class="card-text">
+        0.0から1.0までの値で、楽曲が伝える音楽的なポジティブさを表現する。
+        値が高いトラックはよりポジティブに聞こえ（例：幸せ、陽気、多幸感）、値が低いトラックはよりネガティブに聞こえる（例：悲しい、落ち込む、怒る）。
+      </p>
+    </div>
   </div>
-</div>
 
-<div class="card" style="width: 18rem;">
-  <img src="{% static 'png/tempo.png' %}" class="card-img-top" alt="テンポ">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-
-<div class="card" style="width: 18rem;">
-  <img src="{% static 'png/valence.png' %}" class="card-img-top" alt="曲の明るさ">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
-
-<div class="card" style="width: 18rem;">
-  <img src="{% static 'png/heatmap.png' %}" class="card-img-top" alt="相関関数">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  <div class="card">
+    <img src="{% static 'png/heatmap.png' %}" class="card-img-top" alt="相関関数">
+    <div class="card-body">
+      <p class="card-title">ヒートマップ</p>
+      <p class="card-text">それぞれの指標の関連性を表す。</p>
+    </div>
   </div>
 </div>
 {% endblock Content %}

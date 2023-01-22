@@ -13,29 +13,24 @@ from .config import SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET
 from mysite import settings
 
 
-def main(playlist_id):
+def output_csv(playlist_id):
     # Spotipy認証
     client_credentials_manager = SpotifyClientCredentials(
         SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET
     )
     spotipy = Spotify(client_credentials_manager=client_credentials_manager)
 
-    csv_dir = settings.MEDIA_ROOT + "spotify_music_data.csv"
-
     # csvに出力するために分析対象の曲のIDを取得する
-    track_ids: list = list(get_track_ids(spotipy, playlist_id))
-
-    # csvに出力するために分析対象の曲のIDを取得する
-    track_ids: list = list(get_track_ids(spotipy, playlist_id))
+    track_ids = list(get_track_ids(spotipy, playlist_id))
 
     # csvファイルとして出力
-    music_data = create_csv(spotipy, track_ids)
+    music_data = create_df(spotipy, track_ids)
 
     # csvディレクトリに保存
-    to_csv(music_data)
+    save_csv(music_data)
 
 
-def create_csv(spotipy, track_ids):
+def create_df(spotipy, track_ids):
     tracks = []
 
     for track_id in track_ids:
@@ -67,7 +62,7 @@ def create_csv(spotipy, track_ids):
     return df
 
 
-def to_csv(df):
+def save_csv(df):
     exp_path = settings.MEDIA_ROOT + "spotify_music_data.csv"
     df.to_csv(exp_path, encoding="utf-8", index=False)
     return df

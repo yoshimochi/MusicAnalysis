@@ -34,10 +34,7 @@ def get_track_features(spotipy, id):
     energy: float = features[0]["energy"]
     instrumentalness: float = features[0]["instrumentalness"]
     liveness: float = features[0]["liveness"]
-    loudness: float = features[0]["loudness"]
     speechiness: float = features[0]["speechiness"]
-    tempo: float = features[0]["tempo"]
-    time_signature: int = features[0]["time_signature"]
     valence: float = features[0]["valence"]
 
     track = [
@@ -51,10 +48,7 @@ def get_track_features(spotipy, id):
         energy,
         instrumentalness,
         liveness,
-        loudness,
         speechiness,
-        tempo,
-        time_signature,
         valence,
     ]
     return track
