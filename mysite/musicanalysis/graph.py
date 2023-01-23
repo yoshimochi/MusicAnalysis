@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from mysite import settings
 
-csv_dir = settings.MEDIA_ROOT + "spotify_music_data.csv"
-analysis_data = pd.read_csv(csv_dir, index_col=0)
+csv_path = settings.MEDIA_ROOT + "spotify_music_data.csv"
+analysis_data = pd.read_csv(csv_path, index_col=0)
 
 
 def plot_histogram():

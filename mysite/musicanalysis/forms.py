@@ -15,3 +15,5 @@ class PlaylistIdForm(forms.ModelForm):
                 "URLを正しく入力してください。"
             )
         return value
+
+

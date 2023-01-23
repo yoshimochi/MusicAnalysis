@@ -51,14 +51,11 @@ def create_df(spotipy, track_ids):
             "energy",
             "instrumentalness",
             "liveness",
-            "loudness",
             "speechiness",
-            "tempo",
-            "time_signature",
             "valence",
         ],
     )
-
+    df.head()
     return df
 
 
