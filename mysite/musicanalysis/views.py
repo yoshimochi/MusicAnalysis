@@ -40,7 +40,6 @@ def result(request):
 
     # 登録したIDの中で最新のレコードを取得する
     query = PlaylistUrlModel.objects.order_by("id").last()
-    check_url = "https://open.spotify.com/playlist/"
     analysis_url = query.playlist_url
     analysis_url_path = urlparse(analysis_url).path.split("/")
 
@@ -48,11 +47,7 @@ def result(request):
     playlist_id = analysis_url_path[2]
 
     # 分析用データを保存
-    try:
-        output_csv(playlist_id)
-    except Exception as e:
-        print("csvファイルの作成に失敗しました。")
-        return render(request, template_name)
+    output_csv(playlist_id)
 
     csv_path = settings.MEDIA_ROOT + "spotify_music_data.csv"
     if os.path.exists(csv_path):

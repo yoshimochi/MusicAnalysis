@@ -5,14 +5,13 @@ import seaborn as sns
 from mysite import settings
 
 csv_path = settings.MEDIA_ROOT + "spotify_music_data.csv"
-analysis_data = pd.read_csv(csv_path, index_col=0)
+analysis_data = pd.read_csv(csv_path)
 
 
 def plot_histogram():
     # グラフ作成に不要な列を削除
-    df = analysis_data.drop(
-        columns=["name", "album", "artist", "release_date"]
-    )
+    drop_columns = ["name", "album", "artist", "release_date"]
+    df = analysis_data.drop(drop_columns, axis=1)
     columns = df.columns.values
 
     plt.switch_backend("AGG")
@@ -32,9 +31,9 @@ def plot_histogram():
 
 
 def plot_heatmap():
-    df = analysis_data.drop(
-        columns=["name", "album", "artist", "release_date", "length"]
-    )
+    # グラフ作成に不要な列を削除
+    drop_columns = ["name", "album", "artist", "release_date"]
+    df = analysis_data.drop(drop_columns, axis=1)
 
     # 正規化
     df_mean = (df - df.min()) / (df.max() - df.min()) * 2 + 2
